@@ -297,7 +297,10 @@ function Player() {
         airJumps.current = AIR_JUMPS;
       }
 
-      if (ny < KILL_Y) { die(); ny = KILL_Y; }
+            if (ny < KILL_Y) {
+        die();
+        return;
+      }
 
       // 최종 NaN 체크
       if (!Number.isFinite(nx) || !Number.isFinite(ny) || !Number.isFinite(nz)) {
