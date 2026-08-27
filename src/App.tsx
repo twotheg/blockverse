@@ -3,7 +3,6 @@ import LobbyScreen from './components/LobbyScreen';
 import CustomizeScreen from './components/CustomizeScreen';
 import GameScreen from './components/GameScreen';
 import PWAInstallBanner from './components/PWAInstallBanner';
-import DebugOverlay from './components/DebugOverlay';
 import ErrorBoundary from './components/ErrorBoundary';
 
 export default function App() {
@@ -18,7 +17,6 @@ export default function App() {
         {screen === 'game' && <GameScreen />}
       </ErrorBoundary>
       <PWAInstallBanner />
-      <DebugOverlay />
     </div>
   );
 }
