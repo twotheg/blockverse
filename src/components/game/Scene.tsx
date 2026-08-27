@@ -13,10 +13,10 @@ import {
 import { useGameStore } from '../../store/useGameStore';
 import { input, gameState, gameEvents, useKeyboard } from './input';
 
-const WALK_SPEED = 6;      // 걷기 속도 줄임 (9→6)
-const RUN_SPEED = 10;      // 달리기 속도 줄임 (14→10)
-const JUMP_V = 11;         // 점프력 줄임 (15→11): 약 1.9m 높이
-const GRAVITY = 28;        // 중력 살짝 줄임 (32→28): 체공감 개선
+const WALK_SPEED = 6;
+const RUN_SPEED = 10;
+const JUMP_V = 11;
+const GRAVITY = 28;
 const CHAR_R = 0.6;
 const CHAR_H = 1;
 const KILL_Y = -20;
