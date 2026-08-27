@@ -320,10 +320,6 @@ function Player() {
       );
       camera.position.lerp(vCam.current, 1 - Math.pow(0.001, dt));
       camera.lookAt(tx, ty, tz);
-    } catch (err) {
-      errored.current = true;
-      console.error('[Scene] 물리 연산 오류:', err);
-    }
   });
 
   return (
