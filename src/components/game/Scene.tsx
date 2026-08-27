@@ -4,7 +4,7 @@ import { useEffect, useRef, useMemo, useCallback, memo } from 'react';
 import * as THREE from 'three';
 import Character from '../Character';
 import {
-  buildTower,
+  buildTower,ㄹ
   StaticBlockMesh,
   SpinnerMesh,
   MovingBlockMesh,
@@ -13,10 +13,10 @@ import {
 import { useGameStore } from '../../store/useGameStore';
 import { input, gameState, gameEvents, useKeyboard } from './input';
 
-const WALK_SPEED = 9;
-const RUN_SPEED = 14;
-const JUMP_V = 15;
-const GRAVITY = 32;
+const WALK_SPEED = 6;
+const RUN_SPEED = 10;
+const JUMP_V = 11;
+const GRAVITY = 28;
 const CHAR_R = 0.6;
 const CHAR_H = 1;
 const KILL_Y = -20;
