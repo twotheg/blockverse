@@ -105,13 +105,11 @@ function Player() {
   };
 
   useFrame((state, delta) => {
-    if (errored.current) return;
     const g = ref.current;
     if (!g) return;
 
-    try {
-      const dt = Math.min(Math.max(delta, 0.0001), 1 / 30);
-      const pos = g.position;
+    const dt = Math.min(Math.max(delta, 0.0001), 1 / 30);
+    const pos = g.position;
 
       // ── NaN 안전장치 ──
       if (!Number.isFinite(pos.x) || !Number.isFinite(pos.y) || !Number.isFinite(pos.z)) {
