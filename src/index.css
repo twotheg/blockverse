@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: #0f172a;
+  color: #fff;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+canvas {
+  display: block;
+  touch-action: none;
+}
+
+/* Hide scrollbars cleanly */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Selection */
+::selection {
+  background: rgba(99, 102, 241, 0.5);
+}
+
+/* Smooth everything */
+button {
+  cursor: pointer;
+}
+
+/* Prevent text selection on game UI */
+.pointer-events-none * {
+  user-select: none;
+}

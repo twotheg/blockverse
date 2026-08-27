@@ -1,0 +1,16 @@
+# Render.com 자동 배포 설정
+services:
+  - type: web
+    name: blockverse-server
+    env: node
+    plan: free
+    rootDir: server
+    buildCommand: npm install
+    startCommand: node index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: CLIENT_ORIGIN
+        value: https://YOUR-USERNAME.github.io  # ← 본인 GitHub Pages URL로 교체
+    healthCheckPath: /
+    autoDeploy: true

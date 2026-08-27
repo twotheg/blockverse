@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+
+    <title>BLOCKVERSE · 3D 블록 어드벤처</title>
+    <meta name="description" content="Roblox 스타일의 3D 레고 캐릭터 멀티플레이어 어드벤처. 커스터마이징하고 친구와 함께 도시를 탐험하세요!" />
+
+    <!-- PWA -->
+    <link rel="manifest" href="./manifest.json" />
+    <meta name="theme-color" content="#6366f1" />
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <!-- iOS PWA -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="BLOCKVERSE" />
+    <link rel="apple-touch-icon" href="./icon-192.png" />
+
+    <!-- Open Graph / SNS 공유 -->
+    <meta property="og:title" content="BLOCKVERSE · 3D 블록 어드벤처" />
+    <meta property="og:description" content="친구와 함께하는 3D 레고 블록 멀티플레이어 어드벤처 게임" />
+    <meta property="og:image" content="./icon-512.png" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./icon-192.png" />
+
+    <!-- Prevent overscroll / bounce on iOS -->
+    <style>
+      html, body {
+        overscroll-behavior: none;
+        -webkit-overflow-scrolling: touch;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
