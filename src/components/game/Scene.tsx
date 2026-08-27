@@ -4,7 +4,7 @@ import { useEffect, useRef, useMemo, useCallback, memo } from 'react';
 import * as THREE from 'three';
 import Character from '../Character';
 import {
-  buildTower,ㄹ
+  buildTower,
   StaticBlockMesh,
   SpinnerMesh,
   MovingBlockMesh,
@@ -13,10 +13,10 @@ import {
 import { useGameStore } from '../../store/useGameStore';
 import { input, gameState, gameEvents, useKeyboard } from './input';
 
-const WALK_SPEED = 6;
-const RUN_SPEED = 10;
-const JUMP_V = 11;
-const GRAVITY = 28;
+const WALK_SPEED = 6;      // 걷기 속도 줄임 (9→6)
+const RUN_SPEED = 10;      // 달리기 속도 줄임 (14→10)
+const JUMP_V = 11;         // 점프력 줄임 (15→11): 약 1.9m 높이
+const GRAVITY = 28;        // 중력 살짝 줄임 (32→28): 체공감 개선
 const CHAR_R = 0.6;
 const CHAR_H = 1;
 const KILL_Y = -20;
@@ -66,8 +66,8 @@ function Player() {
     if (!g) return;
     g.position.set(x, y, z);
     vel.current.x = 0; vel.current.y = 0; vel.current.z = 0;
-        grounded.current = true;
-    cooldown.current = 1.5;
+    grounded.current = true;  // 착지 상태로 시작 (바로 떨어지지 않게)
+    cooldown.current = 1.5;   // 리스폰 후 1.5초 무적
     airJumps.current = AIR_JUMPS;
   }, []);
 
@@ -97,9 +97,10 @@ function Player() {
     };
   }, [respawn, restart]);
 
-    const die = () => {
+  const die = () => {
     if (cooldown.current > 0) return;
-    cooldown.current = 1.5;
+    cooldown.current = 1.5; // 무한 루프 방지: 쿨다운 1.5초
+    // 즉시 체크포인트로 이동 (떨어지는 동안 기다리지 않음)
     respawn();
     gameEvents.onDeath?.();
   };
@@ -266,14 +267,14 @@ function Player() {
           const t = Math.max(-s.length / 2, Math.min(s.length / 2, dx * ax + dz * az));
           if (Math.abs(dy) < s.height + CHAR_H && Math.hypot(dx - t * ax, dz - t * az) < CHAR_R + 0.4) {
             die();
-            break;
+            return; // 즉시 프레임 종료 (pos 덮어쓰기 방지)
           }
         } else {
           const ay = Math.sin(a), az = Math.cos(a);
           const t = Math.max(-s.length / 2, Math.min(s.length / 2, dy * ay + dz * az));
           if (Math.abs(dx) < s.height + CHAR_R && Math.hypot(dy - t * ay, dz - t * az) < CHAR_R + 0.4) {
             die();
-            break;
+            return; // 즉시 프레임 종료
           }
         }
       }
@@ -294,16 +295,19 @@ function Player() {
         airJumps.current = AIR_JUMPS;
       }
 
-            if (ny < KILL_Y) {
+      if (ny < KILL_Y) {
         die();
+        // die()가 respawn()을 호출해서 pos를 체크포인트로 이동시킴
+        // 여기서 return해야 아래 pos.set이 위치를 다시 덮어쓰지 않음!
         return;
       }
 
       // 최종 NaN 체크
       if (!Number.isFinite(nx) || !Number.isFinite(ny) || !Number.isFinite(nz)) {
         const p = tower.checkpoints[cp.current] || tower.spawnPoint;
-        nx = p.x; ny = p.y + 1.5; nz = p.z;
+        pos.set(p.x, p.y + 1.5, p.z);
         vel.current.x = 0; vel.current.y = 0; vel.current.z = 0;
+        return;
       }
 
       pos.set(nx, ny, nz);
