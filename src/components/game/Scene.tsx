@@ -67,8 +67,8 @@ function Player() {
     if (!g) return;
     g.position.set(x, y, z);
     vel.current.x = 0; vel.current.y = 0; vel.current.z = 0;
-    grounded.current = false;
-    cooldown.current = 0.8;
+        grounded.current = true;
+    cooldown.current = 1.5;
     airJumps.current = AIR_JUMPS;
   }, []);
 
