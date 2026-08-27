@@ -98,9 +98,10 @@ function Player() {
     };
   }, [respawn, restart]);
 
-  const die = () => {
+    const die = () => {
     if (cooldown.current > 0) return;
-    cooldown.current = 1;
+    cooldown.current = 1.5;
+    respawn();
     gameEvents.onDeath?.();
   };
 
