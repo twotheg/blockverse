@@ -46,7 +46,6 @@ function Player() {
   const coyote = useRef(0);
   const cooldown = useRef(0);
   const airJumps = useRef(AIR_JUMPS);
-  const errored = useRef(false);
 
   // 재사용 벡터 (매 프레임 new 방지 → GC 부담 감소)
   const vFwd = useRef(new THREE.Vector3());
