@@ -57,9 +57,13 @@ export default function GameScreen() {
       setDeaths((d) => d + 1);
       const alive = typeof loseLifeFn === 'function' ? loseLifeFn() : true;
       if (alive) {
-        setFlash('death');
-        setTimeout(() => setFlash(null), 700);
-        (window as any).__respawnCheckpoint?.();
+        // 플래시가 이미 표시 중이면 중복 방지
+        setFlash((prev) => {
+          if (prev === 'death') return prev;
+          setTimeout(() => setFlash(null), 1200);
+          return 'death';
+        });
+        // 리스폰은 Scene.tsx의 die()에서 이미 처리됨
       } else {
         setOver(true);
       }

@@ -4,19 +4,19 @@ import { useEffect, useRef, useMemo, useCallback, memo } from 'react';
 import * as THREE from 'three';
 import Character from '../Character';
 import {
-  buildTower,
   StaticBlockMesh,
   SpinnerMesh,
   MovingBlockMesh,
   JumpPadMesh,
 } from '../Tower';
+import { buildMap } from '../maps';
 import { useGameStore } from '../../store/useGameStore';
 import { input, gameState, gameEvents, useKeyboard } from './input';
 
-const WALK_SPEED = 6;
-const RUN_SPEED = 10;
-const JUMP_V = 11;
-const GRAVITY = 28;
+const WALK_SPEED = 6;      // 걷기 속도 줄임 (9→6)
+const RUN_SPEED = 10;      // 달리기 속도 줄임 (14→10)
+const JUMP_V = 11;         // 점프력 줄임 (15→11): 약 1.9m 높이
+const GRAVITY = 28;        // 중력 살짝 줄임 (32→28): 체공감 개선
 const CHAR_R = 0.6;
 const CHAR_H = 1;
 const KILL_Y = -20;
@@ -55,7 +55,8 @@ function Player() {
   const character = useGameStore((s) => s.character);
   useKeyboard();
 
-  const tower = useMemo(() => buildTower(), []);
+  const mapId = useGameStore((s: any) => s.currentMap) ?? 0;
+  const tower = useMemo(() => buildMap(mapId), [mapId]);
   const movRefs = useMemo(
     () => tower.movingBlocks.map(() => ({ current: null as THREE.Mesh | null })),
     [tower.movingBlocks]
